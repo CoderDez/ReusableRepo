@@ -1,6 +1,7 @@
 from __future__ import annotations
 from typing import Union
 from django.db import models
+from django.db.models import QuerySet
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.contrib.auth.hashers import make_password, check_password
 from .models_validation import(
@@ -118,4 +119,12 @@ class User(AbstractBaseUser, PermissionsMixin):
                 return None
         except:
             return None
+        
+    @classmethod
+    def get_objects_alphabethical_order(cls) -> QuerySet:
+        """method to objects in alphabethical order
+        based on the value of their  field."""
+
+        return User.objects.extra(
+            select={"lower_name": "lower(name)"}).order_by("lower_name")
             

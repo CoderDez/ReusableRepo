@@ -1,0 +1,119 @@
+from typing import Literal, Union
+from openpyxl import Workbook
+from openpyxl.writer.excel import save_virtual_workbook as svw
+from openpyxl.styles import Font, Alignment, PatternFill
+
+
+class ExcelExporter():
+    """class to create and export excel files
+     
+    fields:
+    - book
+    - sheet
+
+    - merge_cells(self, start_column: int, start_row: int, end_column: int, end_row: int) -> bool
+
+    - configure_dimensions(self, column: str, width: int) -> bool
+
+    - configure_header(
+        self, value: str, row: int, column: int, is_bold: bool,
+        alignment: Literal["left", "center", "right"] = "left") -> bool
+
+    - write(
+        self, value: str, row: int, column: int, is_bold: bool, color: Union[None,str] = None,
+        alignment: Literal["left", "center", "right"] = "left") -> bool
+
+    - value_formatter(self, value) -> Union[float, str]
+
+    - get_virtual_workbook(self)"""
+
+    def __init__(self):
+        self.book = Workbook()
+        self.sheet = self.book.active
+        self.__setup()
+
+    def merge_cells(self, start_column: int, start_row: int, end_column: int, end_row: int) -> bool:
+        """Merges cells in the excel file.
+
+           returns True if cells successfully merged, else False."""
+        try:
+            self.sheet.merge_cells(
+                start_column=start_column, start_row=start_row,
+                end_column=end_column, end_row=end_row)
+            return True
+        except:
+            return False
+        
+    def configure_dimensions(self, column: str, width: int) -> bool:
+        """Configures dimensions in the excel file.
+
+           Expects column to be an alphabethic char and
+           width to be an integer.
+
+           returns True if configured successfully, else False."""
+        try:
+            column = column.capitalize()
+            self.sheet.column_dimensions[column].width=width
+            return True
+        except:
+            return False
+        
+    def configure_header(
+        self, value: str, row: int, column: int, is_bold: bool,
+        alignment: Literal["left", "center", "right"] = "left") -> bool:
+        """Configures a header in the excel file.
+
+        returns True if configured successfully, else False."""
+        try:
+            cell = self.sheet.cell(row=row, column=column)
+            cell.value=value
+            if is_bold:
+                bold=Font(bold=True)
+                cell.font=bold
+            align = Alignment(horizontal=alignment)
+            cell.alignment = align
+            return True
+        except:
+            return False
+        
+    def write(
+        self, value: str, row: int, column: int, is_bold: bool, color: Union[None,str] = None,
+        alignment: Literal["left", "center", "right"] = "left") -> bool:
+        """ Writes content to the excel file.
+
+        returns True if wrote successfully, else False."""
+
+        try:
+            cell = self.sheet.cell(row=row, column=column)
+            cell.value= self.value_formatter(value)
+            align = Alignment(horizontal=alignment)
+            cell.alignment=align
+            if(is_bold):
+                bold = Font(bold=True)
+                cell.font=bold
+
+            if color:
+                try:
+                    cell.fill = PatternFill(start_color=color, end_color=color, fill_type="solid")
+                except:
+                    pass
+            return True
+        except:
+            return False
+        
+
+    def value_formatter(self, value) -> Union[float, str]:
+        try:
+            if isinstance(value,float) and not isinstance(value, int):
+                return "{0:.2f}".format(value)
+            else:
+                return value
+        except:
+            return value
+        
+    def get_virtual_workbook(self):
+        """returns an in-memory version of the workbook(book) property."""
+        try:
+            return svw(self.book)
+        except:
+            pass
