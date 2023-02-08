@@ -1,0 +1,40 @@
+{% extends 'base.html'%}
+
+{% load custom_filters %}
+{% block content %}
+<!-- navbar -->
+<nav class="navbar">
+    <h1 class="comp-title">Title</h1>
+    <!-- caret (shown on smaller screen sizes to toggle menu)-->
+    <a href="#" class="toggle-button">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </a>
+    <!-- navbar items-->
+    <div class="navbar-links">
+        <ul>        
+            <li>
+                <a href="">Nav Item</a>
+            </li>
+            <li>
+                <!-- logout -->
+                <div class="dropdown">
+                    <div class="select">
+                        <span class="selected">{{user.get_name_formatted}}</span>
+                        <div class="caret"></div>
+                    </div>
+                    <ul class="menu">
+                        <!-- add href -->
+                        <li><a href="">Logout</a></li>
+                    </ul>
+                </div>
+                <!-- end of logout -->
+            </li>
+        </ul>
+    </div>
+</nav>
+{% endblock %}
+
+
+
