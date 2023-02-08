@@ -5,7 +5,7 @@ from django.db.models import QuerySet
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.contrib.auth.hashers import make_password, check_password
 from .models_validation import(
-    is_email_valid, is_name_valid, is_email_valid, 
+    is_email_address_valid, is_name_valid, is_email_address_valid, 
     is_password_valid
 ) 
 import model_exceptions as me
@@ -91,7 +91,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         else:
             raise me.NameValueError()
             
-        if is_email_valid(self.email):
+        if is_email_address_valid(self.email):
             self.email = self.email.lower().lstrip().rstrip()
         else:
             raise me.EmailFormatError()

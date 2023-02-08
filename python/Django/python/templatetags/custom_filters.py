@@ -16,7 +16,8 @@ def get_item_at_index(collection, index):
     try:
         if index > (len(collection) - 1):
             return None
-        else: return collection[index]
+        else:
+            return collection[index]
     except:
         return None
 

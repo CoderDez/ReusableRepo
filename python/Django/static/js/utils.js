@@ -4,8 +4,6 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-
-
 /**enforces constraints for an input of type text that forces the entry 
  * of values between 0 and 1 to be accepted. 
  * 

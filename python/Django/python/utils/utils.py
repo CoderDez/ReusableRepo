@@ -1,9 +1,6 @@
 from datetime import date, datetime, timedelta
-from typing import Any, Literal, Union
+from typing import Union
 
-""""File contains utility functions, most of which work with dates."""
-
-""" functionality for dates """
 
 def get_date_range(start: str, end: str) -> list[str]:
     """function to return an array of str represented date objects between args for start and end (inclusive)."""
@@ -107,13 +104,10 @@ def get_week_number(value: date) -> int:
     """returns the week number that value resides in."""
     return value.isocalendar()[1]
 
-""" other """
 
 def get_display_name(name) -> str:
     """returns a capitalised name for display purposes."""
     try:
-        x = ""
-        x.lower().cap
         splitter = name.rstrip().lstrip().split(" ")
         splitter = [s.lower().capitalize() for s in splitter]
         return splitter.join(" ")
@@ -124,9 +118,9 @@ def get_display_name(name) -> str:
             return name
 
 def get_distinct_vals(collection: Union[list, set, tuple], index: int):
-    """ function to return all distinct values at a given index in collection.
+    """function to return all distinct values at a given index in collection.
 
-    expects collection to be a 2D."""
+    expects collection to be a 2D list."""
     try:
         d = []
         for c in collection:
@@ -138,7 +132,7 @@ def get_distinct_vals(collection: Union[list, set, tuple], index: int):
         return None
 
 def is_float(element: Any) -> bool:
-    """returns True if elementcan be converted to type float."""
+    """returns True if element can be converted to type float."""
     try:
         float(element)
         return True

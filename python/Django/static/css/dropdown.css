@@ -44,8 +44,8 @@
 }
 
 .select {
-    background: var(--entegro-pink);
-    color: #fff;
+    background-color: --lorem-ipsum; /**/
+    color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -61,7 +61,7 @@
 }
 
 .select:hover {
-    background-color: var(--entegro-pink-darker);
+    background-color:  --lorem-ipsum; /**/
 }
 
 .caret {
@@ -69,7 +69,7 @@
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 6px solid #fff;
+    border-top: 6px solid white;
     transition: 0.3s;
 }
 
@@ -83,11 +83,11 @@
 .menu {
     list-style: none;
     padding: 0.2em 0.5em;
-    background: var(--entegro-pink);
+    background-color:  --lorem-ipsum; /**/
     border: 1px black solid;
     box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.2);
     border-radius: 0.5em;
-    color: var(--entegro-white);
+    color: --lorem-ipsum; /**/
     position: absolute;
     top: 3em;
     left: 50%;
@@ -109,7 +109,7 @@
 }
 
 .scrollable li:hover {
-    background-color: var(--darker-grey);
+    background-color: --lorem-ipsum; /**/
 }
 .menu li a {
     padding: 0;

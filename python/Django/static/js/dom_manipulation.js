@@ -19,6 +19,8 @@ function getParentNode(element, level=1) {
  * 
  * onclick array must contain functions to be added as event listeners
  * for the button click event.
+ * 
+ * returns button element
  */
 function createButton(text=undefined, classes=[], id=undefined, onclick = [], title=undefined) {
     const button = document.createElement("button");

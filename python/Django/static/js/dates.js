@@ -33,6 +33,7 @@ function endDateHandler() {
 function start() {
     dateInput();
 }
+
 window.addEventListener("load", start)
 
 /**function to take in a date object and returns its string representation.*/
