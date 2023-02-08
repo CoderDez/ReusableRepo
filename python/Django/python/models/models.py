@@ -10,6 +10,7 @@ from .models_validation import(
 ) 
 import model_exceptions as me
 from ..utils import utils as ut
+from django.contrib.auth.models import Permission, Group
 
 class CustomAccountManager(BaseUserManager):
     def create_user(self, email, name, user_name, password, **other_fields):
@@ -61,6 +62,20 @@ class User(AbstractBaseUser, PermissionsMixin):
     password = models.CharField(max_length=150, null=False, blank=False)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
+
+    groups = models.ManyToManyField(
+        Group,
+        related_name='my_users',
+        blank=True,
+        help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.')
+        
+    user_permissions = models.ManyToManyField(
+        Permission,
+        related_name='my_users',
+        blank=True,
+        help_text='Specific permissions for this user.')
+
+
 
     objects = CustomAccountManager()
     USERNAME_FIELD = 'email'
