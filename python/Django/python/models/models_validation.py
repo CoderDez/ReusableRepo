@@ -41,15 +41,15 @@ def is_password_valid(pw: str) -> bool:
         if (' ' in pw) == False:
             if len(pw) >= 8 and len(pw) <= 20:
                 if pw.isascii():
-                    # upper alpha char check
-                    if bool(re.match(r'\w*[A-Z]\w*', pw)):
-                        # lower alpha char check
-                        if bool(re.match(r'\w*[a-z]\w*', pw)):
-                            # digit check
-                            if re.search(r'\d', pw) is not None:
-                                # unpermitted char check
-                                if special_char_checker(pw, SPECIAL_CHARS):
-                                    return True              
+                    # unpermitted char check
+                    if special_char_checker(pw, SPECIAL_CHARS):
+                        # upper alpha char check
+                        if bool(re.match(r'\w*[A-Z]\w*', pw)):
+                            # lower alpha char check
+                            if bool(re.match(r'\w*[a-z]\w*', pw)):
+                                # digit check
+                                if re.search(r'\d', pw) is not None:
+                                        return True              
         return False
     except:
         return False          
