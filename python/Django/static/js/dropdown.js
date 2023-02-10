@@ -1,3 +1,14 @@
+/** function to target and toggle the toggle button on the navbar. */ 
+function navbarToggle() {
+    const toggleButton = document.querySelector(".toggle-button");
+    const navbarLinks = document.getElementsByClassName("navbar-links")[0];
+
+    toggleButton.addEventListener("click", () => {
+        navbarLinks.classList.toggle("active")
+    });
+}
+
+
 /** function to regsiter functionality for dropdown */
 function dropdown() {
     const dropdowns = document.querySelectorAll(".dropdown");
@@ -166,5 +177,6 @@ function start() {
     closer();
     dropdownCheckbox();
     selectAllPersonnel();
+    navbarToggle();
 }
 
